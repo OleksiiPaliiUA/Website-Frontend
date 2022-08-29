@@ -1,6 +1,40 @@
+.page-signin {
+  display: flex;
+  height: calc(109vh - 118px);
+  min-height: 700px;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.text-center {
+  text-align: center!important;
+}
+
 .form-signin {
-  max-width: 330px;
+  max-width: 500px;
   padding: 15px;
+  background-color: white;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  border-radius: 5px;
+  border: transparent 0 solid;
+  justify-content: center;
+}
+
+.form-signin img {
+  margin-bottom: 1.5rem!important;
+  vertical-align: center;
+  width: 72px;
+  height: auto;
+}
+
+.components-signin {
+  padding: 75px 30px 75px 30px;
+}
+
+.form-singin .inputs {
+  padding-top: 50px;
 }
 
 .form-signin .form-floating:focus-within {
@@ -35,4 +69,15 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0.375rem;
   border-bottom-left-radius: 0.375rem;
+}
+
+.form-signin input[id='LoginPassword'] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+
+.form-signin button {
+  margin: 10px 5px 10px 5px;
+  width: 47%;
 }
