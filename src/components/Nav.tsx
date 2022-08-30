@@ -11,12 +11,10 @@ export default class Nav extends Component {
                 </button>
                 <input className="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search" />
                 <div className="navbar-nav">
-                    <div className="nav-item text-nowrap">
-                    <div className="nav-link px-3">
-                        <Link to={'/login'}>
+                    <div className="nav-item text-nowrap px-3">
+                        <Link to={'/login'} className="nav-link">
                             Sign In
                         </Link>
-                    </div>
                     </div>
                 </div>
             </header>

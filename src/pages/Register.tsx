@@ -12,6 +12,7 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [password_confirm, setPasswordConfirm] = useState('')
     const [redirect, setRedirect] = useState(false)
+    const [toMainPage, setToMainPage] = useState(false)
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
@@ -32,51 +33,63 @@ const Register = () => {
     if(redirect) {
         return <Navigate to={'/login'}/>
     }
+
+    if(toMainPage) {
+        return <Navigate to={'/'}/>
+    }
     
     return (
-        <div className="page-signin">
-            <main className="form-signin w-100 m-auto">
-                <form onSubmit={submit} className='components-signin'>
-                    <div className='text-center'>
-                        <img src="logo192.png" alt='' />
-                        <h3 className="h2 mb-3 fw-normal">Welcome</h3>
-                        <h5 className="h5 mb-3 fw-normal">Please sign up</h5>
-                    </div>
-                    <div className="form-floating">
-                        <input type="textFirst" className="form-control" placeholder="Oleksii" required
-                            onChange={e => setFirstName(e.target.value)}
-                        />
-                        <label>First name</label>
-                    </div>
-                    <div className="form-floating">
-                        <input type="textLast" className="form-control" placeholder="Palii" required
-                            onChange={e => setLastName(e.target.value)}
-                        />
-                        <label>Last name</label>
-                    </div>
-                    <div className="form-floating">
-                        <input type="email" className="form-control" placeholder="name@example.com" required
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                        <label>Email address</label>
-                    </div>
-                    <div className="form-floating">
-                        <input type="password" className="form-control" placeholder="Password" required
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                        <label>Password</label>
-                    </div>
-                    <div className="form-floating">
-                        <input type="password" className="form-control" placeholder="Password Confirm" required
-                            onChange={e => setPasswordConfirm(e.target.value)}
-                        />
-                        <label>Password Confirm</label>
-                    </div>
-                    <button className="btn" type="button" onClick={e => setRedirect(true)}>Sign in</button>
-                    <button className="btn btn-primary" type="submit">Sign up</button>
-                </form>
-            </main>
-        </div>
+        <>
+            <nav>
+                <img src="logo192.png" alt='' />
+                <button type="button" onClick={e => setToMainPage(true)}>
+                    <div style={{margin: '0 2rem 0 2rem'}}>Return to Main Page</div>
+                </button>
+            </nav>
+            <div className="page-signin">
+                <main className="form-signin w-100 m-auto">
+                    <form onSubmit={submit} className='components-signin'>
+                        <div className='text-center'>
+                            <img src="logo192.png" alt='' />
+                            <h3 className="h2 mb-3 fw-normal">Welcome</h3>
+                            <h5 className="h5 mb-3 fw-normal">Please sign up</h5>
+                        </div>
+                        <div className="form-floating">
+                            <input type="textFirst" className="form-control" placeholder="Oleksii" required
+                                onChange={e => setFirstName(e.target.value)}
+                            />
+                            <label>First name</label>
+                        </div>
+                        <div className="form-floating">
+                            <input type="textLast" className="form-control" placeholder="Palii" required
+                                onChange={e => setLastName(e.target.value)}
+                            />
+                            <label>Last name</label>
+                        </div>
+                        <div className="form-floating">
+                            <input type="email" className="form-control" placeholder="name@example.com" required
+                                onChange={e => setEmail(e.target.value)}
+                            />
+                            <label>Email address</label>
+                        </div>
+                        <div className="form-floating">
+                            <input type="password" className="form-control" placeholder="Password" required
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            <label>Password</label>
+                        </div>
+                        <div className="form-floating">
+                            <input type="password" className="form-control" placeholder="Password Confirm" required
+                                onChange={e => setPasswordConfirm(e.target.value)}
+                            />
+                            <label>Password Confirm</label>
+                        </div>
+                        <button className="btn" type="button" onClick={e => setRedirect(true)}>Already have account?</button>
+                        <button className="btn btn-primary" type="submit">Sign up</button>
+                    </form>
+                </main>
+            </div>
+        </>
     )
 }
 

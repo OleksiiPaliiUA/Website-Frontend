@@ -1,11 +1,45 @@
 .page-signin {
   display: flex;
-  height: calc(109vh - 118px);
+  height: calc(100vh - 5.5rem);
   min-height: 700px;
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
+}
+
+nav {
+  padding-top: 0.5rem!important;
+  padding-bottom: 0.5rem!important;
+  background-color: #007bff;
+}
+
+nav img {
+  margin-left: 1.5rem!important;
+  vertical-align: center;
+  width: 72px;
+  height: auto;
+}
+
+nav button {
+  float: right;
+  margin: 1rem 1rem 1rem 0;
+  position: relative;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.375rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: #f5f5f5;
+  transition: border-color .15s ease-in-out;
+}
+
+nav button:hover {
+  border: 1px solid #f5f5f5;
 }
 
 .text-center {
@@ -79,5 +113,5 @@
 
 .form-signin button {
   margin: 10px 5px 10px 5px;
-  width: 47%;
+  width: 46%;
 }

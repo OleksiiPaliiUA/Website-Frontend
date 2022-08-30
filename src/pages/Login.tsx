@@ -32,31 +32,39 @@ const Login = () => {
     }
     
     return (
-        <div className='page-signin'>
-            <main className="form-signin w-100 m-auto">
-                <form onSubmit={submit} className='components-signin'>
-                    <div className='text-center'>
-                        <img src="logo192.png" alt='' />
-                        <h3 className="h2 mb-3 fw-normal">Welcome</h3>
-                        <h5 className="h5 mb-3 fw-normal">Please sign in</h5>
-                    </div>
-                    <div className="form-floating">
-                        <input type="email" className="form-control" placeholder="name@example.com" required 
-                            onChange={e => setEmail(e.target.value)}
-                        />
-                        <label>Email address</label>
-                    </div>
-                    <div className="form-floating">
-                        <input type="password" className="form-control" placeholder="Password" id='LoginPassword' required 
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                        <label>Password</label>
-                    </div>
-                    <button type='button' className="btn" onClick={e => setToSignUpPage(true)}>Create account</button>
-                    <button type="submit" className="btn btn-primary">Sign in</button>
-                </form>
-            </main>
-        </div>
+        <>
+            <nav>
+                <img src="logo192.png" alt='' />
+                <button type="button" onClick={e => setRedirect(true)}>
+                    <div style={{margin: '0 2rem 0 2rem'}}>Return to Main Page</div>
+                </button>
+            </nav>
+            <div className='page-signin'>
+                <main className="form-signin w-100 m-auto">
+                    <form onSubmit={submit} className='components-signin'>
+                        <div className='text-center'>
+                            <img src="logo192.png" alt='' />
+                            <h3 className="h2 mb-3 fw-normal">Welcome</h3>
+                            <h5 className="h5 mb-3 fw-normal">Please sign in</h5>
+                        </div>
+                        <div className="form-floating">
+                            <input type="email" className="form-control" placeholder="name@example.com" required 
+                                onChange={e => setEmail(e.target.value)}
+                            />
+                            <label>Email address</label>
+                        </div>
+                        <div className="form-floating">
+                            <input type="password" className="form-control" placeholder="Password" id='LoginPassword' required 
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            <label>Password</label>
+                        </div>
+                        <button type='button' className="btn" onClick={e => setToSignUpPage(true)}>Create account</button>
+                        <button type="submit" className="btn btn-primary">Sign in</button>
+                    </form>
+                </main>
+            </div>
+        </>
     );
 };
 
