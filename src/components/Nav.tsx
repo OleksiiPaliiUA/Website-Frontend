@@ -1,23 +1,45 @@
-import { Component } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { User } from "../models/user";
 
-export default class Nav extends Component {
-    render() {
-        return (
-            <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-                <div className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Admin Panel</div>
-                <button className="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <input className="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search" />
-                <div className="navbar-nav">
-                    <div className="nav-item text-nowrap px-3">
-                        <Link to={'/login'} className="nav-link">
-                            Sign In
-                        </Link>
-                    </div>
-                </div>
-            </header>
-        )
+const Nav = () => {
+
+    const [user, setUser] = useState(new User())
+
+    useEffect(() => {
+        axios.get('user')
+            .then(res => {
+                setUser(new User(
+                    res.data.id,
+                    res.data.first_name,
+                    res.data.last_name,
+                    res.data.email,
+                    res.data.role
+                ))
+            })
+            .catch(e => {})
+    }, [])
+
+    const logOut = async () => {
+        await axios.post('logout', {})
     }
+
+    return (
+        <nav className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+            <div className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Admin Panel</div>
+            <div className="navbar-nav">
+                <div className="nav-item text-nowrap">
+                    <Link to={'/profile'} className="signLink px-3">
+                        {user?.name}
+                    </Link>
+                    <Link to={'/login'} className="signLink px-3" onClick={e => logOut()}>
+                        Sign out
+                    </Link>
+                </div>
+            </div>
+        </nav>
+    )
 }
+
+export default Nav;

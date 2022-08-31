@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import '../Login.css'
 
@@ -10,13 +10,24 @@ const Login = () => {
     const [redirect, setRedirect] = useState(false)
     const [toSignUpPage, setToSignUpPage] = useState(false)
 
+    useEffect(() => {
+        (
+            async () => {
+                const {data} = await axios.get('user')
+                if(data.first_name !== ''){
+                    setRedirect(true)
+                }
+            } 
+        )()            
+    })
+
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const {status} = await axios.post('http://localhost:8000/api/login', {
+        const {status} = await axios.post('login', {
             email,
             password
-        }, {withCredentials: true})
+        })
 
         if(status === 201){
             setRedirect(true)
@@ -35,9 +46,6 @@ const Login = () => {
         <>
             <nav>
                 <img src="logo192.png" alt='' />
-                <button type="button" onClick={e => setRedirect(true)}>
-                    <div style={{margin: '0 2rem 0 2rem'}}>Return to Main Page</div>
-                </button>
             </nav>
             <div className='page-signin'>
                 <main className="form-signin w-100 m-auto">
