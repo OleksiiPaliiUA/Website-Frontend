@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import '../Login.css'
 
@@ -9,29 +9,25 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
     const [toSignUpPage, setToSignUpPage] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(<></>)
 
-    useEffect(() => {
-        (
-            async () => {
-                const {data} = await axios.get('user')
-                if(data.first_name !== ''){
-                    setRedirect(true)
-                }
-            } 
-        )()            
-    })
-
-    const submit = async (e: SyntheticEvent) => {
+    const submit = (e: SyntheticEvent) => {
         e.preventDefault()
 
-        const {status} = await axios.post('login', {
+        axios.post('login', {
             email,
             password
         })
-
-        if(status === 201){
-            setRedirect(true)
-        }
+            .then(res => {
+                setRedirect(true)
+            })
+            .catch(error => {
+                setErrorMessage(
+                    <div className='errorMessage'>
+                        {(error.response.data.message.toString())[0].toUpperCase() + error.response.data.message.toString().substring(1)}.
+                    </div>
+                )
+            })
     }
 
     if(toSignUpPage) {
@@ -67,6 +63,7 @@ const Login = () => {
                             />
                             <label>Password</label>
                         </div>
+                        {errorMessage}
                         <button type='button' className="btn" onClick={e => setToSignUpPage(true)}>Create account</button>
                         <button type="submit" className="btn btn-primary">Sign in</button>
                     </form>

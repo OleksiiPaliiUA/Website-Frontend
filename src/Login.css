@@ -115,3 +115,13 @@ nav button:hover {
   margin: 10px 5px 10px 5px;
   width: 46%;
 }
+
+.errorMessage {
+  align-items: flex-start;
+  color: #d93025;
+  display: flex;
+  font-size: 12px;
+  line-height: normal;
+  margin-top: 2px;
+  margin-left: 13px;
+}

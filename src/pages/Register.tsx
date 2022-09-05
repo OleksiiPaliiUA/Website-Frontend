@@ -1,4 +1,4 @@
-import {SyntheticEvent, useEffect, useState} from 'react'
+import {SyntheticEvent, useState} from 'react'
 import axios from 'axios'
 import '../Login.css'
 import { Navigate } from 'react-router-dom'
@@ -12,37 +12,35 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [password_confirm, setPasswordConfirm] = useState('')
     const [redirect, setRedirect] = useState(false)
-    const [toMainPage, setToMainPage] = useState(false)
+    const [errorMessage, setErrorMessage] = useState(<></>)
 
-    const submit = async (e: SyntheticEvent) => {
+    const submit = (e: SyntheticEvent) => {
         e.preventDefault()
-        
-        const {status} = await axios.post('register', {
+        if(password.length < 8 || password_confirm.length < 8){
+            setErrorMessage(
+                <div className='errorMessage'>
+                    Password must be at least 8 characters. 
+                </div>
+            )
+            return
+        }
+        axios.post('register', {
             first_name,
             last_name,
             email,
             password,
             password_confirm
         })
-
-        if(status === 201) {
-            setRedirect(true)
-        }
-    }
-
-    useEffect(() => {
-        (
-            async () => {
-                const {data} = await axios.get('user')
-                if(data.first_name !== ''){
-                    setToMainPage(true)
-                }
-            } 
-        )()            
-    })
-
-    if(toMainPage) {
-        return <Navigate to={'/'}/>
+            .then(res => {
+                setRedirect(true)
+            })
+            .catch(error => {
+                setErrorMessage(
+                    <div className='errorMessage'>
+                        {(error.response.data.message.toString())[0].toUpperCase() + error.response.data.message.toString().substring(1)}.
+                    </div>
+                )
+            })
     }
 
     if(redirect) {
@@ -92,6 +90,7 @@ const Register = () => {
                             />
                             <label>Password Confirm</label>
                         </div>
+                        {errorMessage}
                         <button className="btn" type="button" onClick={e => setRedirect(true)}>Already have account?</button>
                         <button className="btn btn-primary" type="submit">Sign up</button>
                     </form>
