@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { SyntheticEvent, useState } from 'react';
+import { SetStateAction, SyntheticEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import AuthInput from '../components/AuthInput';
 import '../Login.css'
 
 const Login = () => {
@@ -13,7 +14,6 @@ const Login = () => {
 
     const submit = (e: SyntheticEvent) => {
         e.preventDefault()
-
         axios.post('login', {
             email,
             password
@@ -51,18 +51,19 @@ const Login = () => {
                             <h3 className="h2 mb-3 fw-normal">Welcome</h3>
                             <h5 className="h5 mb-3 fw-normal">Please sign in</h5>
                         </div>
-                        <div className="form-floating">
-                            <input type="email" className="form-control" placeholder="name@example.com" required 
-                                onChange={e => setEmail(e.target.value)}
-                            />
-                            <label>Email address</label>
-                        </div>
-                        <div className="form-floating">
-                            <input type="password" className="form-control" placeholder="Password" id='LoginPassword' required 
-                                onChange={e => setPassword(e.target.value)}
-                            />
-                            <label>Password</label>
-                        </div>
+                        <AuthInput
+                            type = 'email'
+                            placeholder = 'name@example.com'
+                            onChange = {(e: SetStateAction<string>) => setEmail(e)}
+                            label = 'Email address'
+                        />
+                        <AuthInput
+                            type = 'password'
+                            placeholder = 'Password'
+                            onChange = {(e: SetStateAction<string>) => setPassword(e)}
+                            label = 'Password'
+                            id = 'LoginPassword'
+                        />
                         {errorMessage}
                         <button type='button' className="btn" onClick={e => setToSignUpPage(true)}>Create account</button>
                         <button type="submit" className="btn btn-primary">Sign in</button>

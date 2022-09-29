@@ -1,7 +1,8 @@
-import {SyntheticEvent, useState} from 'react'
+import {SetStateAction, SyntheticEvent, useState} from 'react'
 import axios from 'axios'
 import '../Login.css'
 import { Navigate } from 'react-router-dom'
+import AuthInput from '../components/AuthInput'
 
 
 const Register = () => {
@@ -60,36 +61,36 @@ const Register = () => {
                             <h3 className="h2 mb-3 fw-normal">Welcome</h3>
                             <h5 className="h5 mb-3 fw-normal">Please sign up</h5>
                         </div>
-                        <div className="form-floating">
-                            <input type="textFirst" className="form-control" placeholder="Oleksii" required
-                                onChange={e => setFirstName(e.target.value)}
-                            />
-                            <label>First name</label>
-                        </div>
-                        <div className="form-floating">
-                            <input type="textLast" className="form-control" placeholder="Palii" required
-                                onChange={e => setLastName(e.target.value)}
-                            />
-                            <label>Last name</label>
-                        </div>
-                        <div className="form-floating">
-                            <input type="email" className="form-control" placeholder="name@example.com" required
-                                onChange={e => setEmail(e.target.value)}
-                            />
-                            <label>Email address</label>
-                        </div>
-                        <div className="form-floating">
-                            <input type="password" className="form-control" placeholder="Password" required
-                                onChange={e => setPassword(e.target.value)}
-                            />
-                            <label>Password</label>
-                        </div>
-                        <div className="form-floating">
-                            <input type="password" className="form-control" placeholder="Password Confirm" required
-                                onChange={e => setPasswordConfirm(e.target.value)}
-                            />
-                            <label>Password Confirm</label>
-                        </div>
+                        <AuthInput
+                            type = 'textFirst'
+                            placeholder = 'First Name'
+                            onChange = {(e: SetStateAction<string>) => setFirstName(e)}
+                            label = 'First name'
+                        />
+                        <AuthInput
+                            type = 'textLast'
+                            placeholder = 'Last Name'
+                            onChange = {(e: SetStateAction<string>) => setLastName(e)}
+                            label = 'Last name'
+                        />
+                        <AuthInput
+                            type = 'email'
+                            placeholder = 'name@example.com'
+                            onChange = {(e: SetStateAction<string>) => setEmail(e)}
+                            label = 'Email address'
+                        />
+                        <AuthInput
+                            type = 'password'
+                            placeholder = 'Password'
+                            onChange = {(e: SetStateAction<string>) => setPassword(e)}
+                            label = 'Password'
+                        />
+                        <AuthInput
+                            type = 'password'
+                            placeholder = 'Password Confirm'
+                            onChange = {(e: SetStateAction<string>) => setPasswordConfirm(e)}
+                            label = 'Password Confirm'
+                        />
                         {errorMessage}
                         <button className="btn" type="button" onClick={e => setRedirect(true)}>Already have account?</button>
                         <button className="btn btn-primary" type="submit">Sign up</button>

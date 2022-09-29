@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
 
-axios.defaults.baseURL = `http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_BACKEND_PORT}/api/`
+axios.defaults.baseURL = `http://localhost:8000/api/`
 axios.defaults.withCredentials = true
 
 const root = ReactDOM.createRoot(
